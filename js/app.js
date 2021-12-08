@@ -6,6 +6,9 @@ console.log(ul);
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
+
+
+
 // object literals defined by city
 //console.log(cookiesPerHour)
 let seattle = {
@@ -232,6 +235,23 @@ let lima = {
 
 }
 
+let allCities = [];
+console.log(allCities);
+function City(name, minCust, maxCust, avgCookiePerCust, dailyTotal) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgCookiePerCust = avgCookiePerCust;
+  //this.custPerHourArr = custPerHourArr;
+  this.dailyTotal = dailyTotal;
+  allCities.push(this);
+}
+
+let limaTable = new City ('Lima', '2', '16', '4.6', 0);
+
+
+
+
 lima.helpRandomCust(this.minCust, this.maxCust)
 lima.helpCustPerHour()
 console.log(lima.custPerHourArr)
@@ -259,4 +279,5 @@ lima.render = function () {
 function getRandomCust(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
 
