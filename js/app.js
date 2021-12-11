@@ -1,3 +1,4 @@
+
 'use strict';
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
@@ -16,6 +17,8 @@ function Store(city, minCust, maxCust, avgCookiePerCust) {
   this.dailyTotal = 0;
   allCities.push(this);
   this.renderSales();
+  this.hourTotal = 0;
+
 }
 //use when build is complete
 
@@ -73,6 +76,7 @@ function tableHeader() {
   let th = document.createElement('th');
   th.textContent = 'Daily Store Total';
   tr.appendChild(th);
+
 }
 
 function allPatCookiesPerHour() {
@@ -89,7 +93,7 @@ function allPatCookiesPerHour() {
   }
 }
 
-function tableFooter () {
+function tableFooter() {
   allPatCookiesPerHour();
   let tfoot = document.getElementById('tfoot');
   let tr = document.createElement('tr');
@@ -102,7 +106,30 @@ function tableFooter () {
     td.textContent = allPatCookiesPerHourArr[i];
     tr.appendChild(td);
   }
+  let allHourTotal = 0;
+  for (let i = 0; i < allCities.length; i++) {
+    allHourTotal += allCities[i].dailyTotal;
+  }
+  let grandTotal = document.createElement('td');
+  grandTotal.textContent = allHourTotal;
+  tr.appendChild(grandTotal);
+
+  // function renderGrand() {
+  //   grandTotal();
+  //   let td = document.createElement('td');
+  //   td.textContent = 'grand totes';
+  //   tr.appendChild(td);
+
+
+  // grab index at 1 at every cities
+
 }
+
+// function grandTotal () {
+// for (let i = 0; i < hours.length; i++){
+//   let allHourTotal = 0
+// for (let j = 0; j < allPatCookiesPerHourArr[j]; j++) {
+//   allHourTotal += 
 
 new Store('Seattle', 23, 65, 6.3);
 new Store('Tokyo', 3, 24, 1.2);
@@ -112,5 +139,4 @@ new Store('Lima', 2, 16, 4.6);
 
 tableHeader();
 tableFooter();
-
 
