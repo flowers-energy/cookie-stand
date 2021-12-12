@@ -1,6 +1,10 @@
+
 'use strict';
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
+
+// DOM window
+let form = document.querySelector('form');
 
 let allCities = [];
 
@@ -16,6 +20,8 @@ function Store(city, minCust, maxCust, avgCookiePerCust) {
   this.dailyTotal = 0;
   allCities.push(this);
   this.renderSales();
+  this.hourTotal = 0;
+
 }
 //use when build is complete
 
@@ -73,6 +79,7 @@ function tableHeader() {
   let th = document.createElement('th');
   th.textContent = 'Daily Store Total';
   tr.appendChild(th);
+
 }
 
 function allPatCookiesPerHour() {
@@ -80,16 +87,12 @@ function allPatCookiesPerHour() {
     let sum = 0;
     for (let c = 0; c < allCities.length; c++) {
       sum += allCities[c].cookiesPerHourArr[i];
-      //console.log(sum);
     }
-    console.log(sum);
     allPatCookiesPerHourArr.push(sum);
-
-    //console.log(allPatCookiesPerHourArr[i]);
   }
 }
 
-function tableFooter () {
+function tableFooter() {
   allPatCookiesPerHour();
   let tfoot = document.getElementById('tfoot');
   let tr = document.createElement('tr');
@@ -102,6 +105,28 @@ function tableFooter () {
     td.textContent = allPatCookiesPerHourArr[i];
     tr.appendChild(td);
   }
+  let allHourTotal = 0;
+  for (let i = 0; i < allCities.length; i++) {
+    allHourTotal += allCities[i].dailyTotal;
+  }
+  let grandTotal = document.createElement('td');
+  grandTotal.textContent = allHourTotal;
+  tr.appendChild(grandTotal);
+
+}
+// Event Handler
+function handleSubmit(event) {
+  event.preventDefault();
+  // store requirements
+  let name = event.target.name.value;
+  let min = +event.target.min.value;
+  let max = +event.target.max.value;
+  let avg = +event.target.avg.value;
+
+  // instantiate new store
+  // need to render store - constructor
+  // footer needs to work
+  new Store(name, min, max, avg);
 }
 
 new Store('Seattle', 23, 65, 6.3);
@@ -113,4 +138,5 @@ new Store('Lima', 2, 16, 4.6);
 tableHeader();
 tableFooter();
 
-
+// Event Listener
+form.addEventListener('submit', handleSubmit);
