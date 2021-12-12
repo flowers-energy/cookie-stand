@@ -3,6 +3,9 @@
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 
+// DOM window
+let form = document.querySelector('form');
+
 let allCities = [];
 
 let allPatCookiesPerHourArr = [];
@@ -84,12 +87,8 @@ function allPatCookiesPerHour() {
     let sum = 0;
     for (let c = 0; c < allCities.length; c++) {
       sum += allCities[c].cookiesPerHourArr[i];
-      //console.log(sum);
     }
-    console.log(sum);
     allPatCookiesPerHourArr.push(sum);
-
-    //console.log(allPatCookiesPerHourArr[i]);
   }
 }
 
@@ -114,22 +113,21 @@ function tableFooter() {
   grandTotal.textContent = allHourTotal;
   tr.appendChild(grandTotal);
 
-  // function renderGrand() {
-  //   grandTotal();
-  //   let td = document.createElement('td');
-  //   td.textContent = 'grand totes';
-  //   tr.appendChild(td);
-
-
-  // grab index at 1 at every cities
-
 }
+// Event Handler
+function handleSubmit(event) {
+  event.preventDefault();
+  // store requirements
+  let name = event.target.name.value;
+  let min = +event.target.min.value;
+  let max = +event.target.max.value;
+  let avg = +event.target.avg.value;
 
-// function grandTotal () {
-// for (let i = 0; i < hours.length; i++){
-//   let allHourTotal = 0
-// for (let j = 0; j < allPatCookiesPerHourArr[j]; j++) {
-//   allHourTotal += 
+  // instantiate new store
+  // need to render store - constructor
+  // footer needs to work
+  new Store(name, min, max, avg);
+}
 
 new Store('Seattle', 23, 65, 6.3);
 new Store('Tokyo', 3, 24, 1.2);
@@ -140,3 +138,5 @@ new Store('Lima', 2, 16, 4.6);
 tableHeader();
 tableFooter();
 
+// Event Listener
+form.addEventListener('submit', handleSubmit);

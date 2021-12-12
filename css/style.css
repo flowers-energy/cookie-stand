@@ -3,7 +3,16 @@
 }
 
 table {
-  border: 1px solid black;
+  border: 2px solid black;
+}
+
+form {
+  border: 2px solid black;
+  width: auto;
+}
+
+fieldset {
+  display: inline;
 }
 
 td, th {
@@ -18,7 +27,7 @@ body {
 /* header */
 
 header {
-  background-color: 444;
+  background-color: salmon;
   height: 100px;
 }
 
