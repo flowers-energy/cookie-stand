@@ -83,6 +83,7 @@ function tableHeader() {
 }
 
 function allPatCookiesPerHour() {
+  allPatCookiesPerHourArr = [];
   for (let i = 0; i < hours.length; i++) {
     let sum = 0;
     for (let c = 0; c < allCities.length; c++) {
@@ -92,9 +93,9 @@ function allPatCookiesPerHour() {
   }
 }
 
+let tfoot = document.getElementById('tfoot');
 function tableFooter() {
   allPatCookiesPerHour();
-  let tfoot = document.getElementById('tfoot');
   let tr = document.createElement('tr');
   tfoot.appendChild(tr);
   let td = document.createElement('td');
@@ -127,6 +128,9 @@ function handleSubmit(event) {
   // need to render store - constructor
   // footer needs to work
   new Store(name, min, max, avg);
+  tfoot.innerHTML = '';
+  tableFooter();
+
 }
 
 new Store('Seattle', 23, 65, 6.3);
